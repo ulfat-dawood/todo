@@ -1,0 +1,133 @@
+//- doctype html
+//- html
+//-   head
+//-     title Todo List
+//-     link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh', crossorigin='anonymous')
+//-     script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js', integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n', crossorigin='anonymous')
+//-     script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo', crossorigin='anonymous')
+//-     script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6', crossorigin='anonymous')
+//-     script(src='https://kit.fontawesome.com/7ea5b3f3ae.js', crossorigin='anonymous')
+//-   body
+//-     .container
+//-       .row
+//-         .col-11.mt-1
+//-           h1 Todo
+//-         .col
+//-           form(action='/tasks/add', method='POST')
+//-             #modalLoginForm.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+//-               .modal-dialog(role='document')
+//-                 .modal-content
+//-                   .modal-header.text-center
+//-                     h4.modal-title.w-100.font-weight-bold Add a new task
+//-                     button.close(type='button', data-dismiss='modal', aria-label='Close')
+//-                       span(aria-hidden='true') ×
+//-                   .modal-body
+//-                     .md-form.mb-4
+//-                       label(data-error='wrong', data-success='right', for='defaultForm-email') Task:
+//-                       input#defaultForm-email.form-control.validate(name='title', type='text')
+//-                     .md-form.mb-4
+//-                       label(data-error='wrong', data-success='right', for='defaultForm-pass') Description
+//-                       input#defaultForm-pass.form-control.validate(name='description', type='text')
+//-                     .md-form.mb-4
+//-                       label(data-error='wrong', data-success='right', for='defaultForm-pass') Due Date:
+//-                       input#defaultForm-pass.form-control.validate(name='due', type='Date')
+//-                   .modal-footer.d-flex.justify-content-center
+//-                     button.btn.btn-default ADD
+//-           a.btn.btn-default.btn-rounded.mb-4(href='', data-toggle='modal', data-target='#modalLoginForm')
+//-             i.fas.fa-plus-circle.fa-2x.mt-3
+//-         table.table.table-hover
+//-           thead.thead-dark
+//-             tr
+//-               th(style='width:5%')  
+//-               th(style='width:30%') Task
+//-               th(style='width:45%') Description
+//-               th(style='width:15%') Due Date
+//-               th(style='width:5%')  
+//-           tbody
+//-             tr
+//-               th(scope='row')
+//-                 .form-check
+//-                   input#materialUnchecked.form-check-input(onchange='func()', type='checkbox')
+//-               td Laundry
+//-               td My outfit
+//-               td date
+//-               td
+//-                 a(href='#')
+//-                   i.fas.fa-trash(onclick="alert('TRASH')")
+//-     script(type='text/javascript').
+//-       //add code here
+doctype html
+html
+  head
+    title Todo List
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css', integrity='sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh', crossorigin='anonymous')
+    script(src='https://code.jquery.com/jquery-3.4.1.slim.min.js', integrity='sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n', crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo', crossorigin='anonymous')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6', crossorigin='anonymous')
+    //script(type='module', src='javascripts/table.js')
+    script(src='https://kit.fontawesome.com/7ea5b3f3ae.js', crossorigin='anonymous')
+
+  body
+    nav.navbar.navbar-expand-sm(style="background-color: #E8E8E8;")
+      .row.container-fluid
+        .nav-item
+          .h3
+            | TO-DO APP
+        .nav-item
+          img(src='http://localhost:2229/images/img.png', width='200px')
+        .nav-item
+          .h3
+            | Logout  
+            i.fa.fa-sign-out(aria-hidden='true')
+    br
+    .container
+      .row
+        .col
+          form(action='/tasks/add', method='POST')
+            #modalLoginForm.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+              .modal-dialog(role='document')
+                .modal-content
+                  .modal-header.text-center
+                    h4.modal-title.w-100.font-weight-bold Add a new task
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                      span(aria-hidden='true') ×
+                  .modal-body
+                    .md-form.mb-4
+                      label(data-error='wrong', data-success='right', for='defaultForm-email') Task:
+                      input#defaultForm-email.form-control.validate(name='title', type='text')
+                    .md-form.mb-4
+                      label(data-error='wrong', data-success='right', for='defaultForm-pass') Description
+                      input#defaultForm-pass.form-control.validate(name='description', type='text')
+                    .md-form.mb-4
+                      label(data-error='wrong', data-success='right', for='defaultForm-pass') Due Date:
+                      input#defaultForm-pass.form-control.validate(name='due', type='Date')
+                  .modal-footer.d-flex.justify-content-center
+                    button.btn.btn-default ADD
+          a.btn.btn-default.btn-rounded.mb-4(href='', data-toggle='modal', data-target='#modalLoginForm')
+            i.fas.fa-plus-circle.fa-2x.mt-4
+          .h4.d-inline.pt-4 
+            | ADD TASKS
+          .col-11.mt-1
+          h1 
+        table.table.table-hover
+          thead.thead-dark
+            tr
+              th(style='width:5%;')  
+              th(style='width:30%;') Task
+              th(style='width:45%;') Description
+              th(style='width:15%;') Due Date
+              th(style='width:5%;')  
+          
+          for val in arr
+            tr(style=val[4])
+              td
+                form(action='/tasks/done', method='POST')
+                  button.btn.btn-default(name=val[0],data-toggle='tooltip', title='MARK DONE')
+                    i.fas.fa-check
+              td= val[1]
+              td= val[2]
+              td= val[3]
+              td  
+                form(action='/tasks/delete', method='POST')
+                  button.btn.btn-default(name=val[0], data-toggle='tooltip', title='REMOVE')
+                    i.fas.fa-trash
